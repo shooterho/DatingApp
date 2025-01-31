@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid" bis_skin_checked="1">
+    <a class="navbar-brand" href="#">Carousel</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      id="navbarCollapse"
+      bis_skin_checked="1"
+    >
+      @if(accountService.currentUser()){
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Matches</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Messages</a>
+        </li>
+      </ul>
+      } @if(accountService.currentUser()){
+      <div dropdown class="dropdown">
+        <a dropdownToggle class="dropdown-toggle text-light">Welcome user</a>
+        <div *dropdownMenu class="dropdown-menu">
+          <a class="dropdown-item">Edit Profile</a
+          ><a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
+      }@if(!accountService.currentUser()){
+      <form
+        #loginForm="ngForm"
+        (ngSubmit)="login()"
+        class="d-flex ms-auto"
+        role="search"
+      >
+        <input
+          class="form-control mx-sm-2"
+          name="username"
+          [(ngModel)]="model.username"
+          placeholder="Username"
+          aria-label="Search"
+        />
+        <input
+          class="form-control mx-sm-2"
+          name="password"
+          [(ngModel)]="model.password"
+          placeholder="Password"
+          type="password"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Login
+        </button>
+      </form>
+      }
+    </div>
+  </div>
+</nav>
+<!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Dating App</a>
+  @if(accountService.currentUser()){
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link">Matches</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link">Lists</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link">Messages</a>
+    </li>
+  </ul>
+  } @if(accountService.currentUser()){
+  <div dropdown class="dropdown">
+    <a dropdownToggle class="dropdown-toggle text-light">Welcome user</a>
+    <div *dropdownMenu class="dropdown-menu">
+      <a class="dropdown-item">Edit Profile</a
+      ><a class="dropdown-item" (click)="logout()">Logout</a>
+    </div>
+  </div>
+  } @if(!accountService.currentUser()){
+  <form
+    #loginForm="ngForm"
+    (ngSubmit)="login()"
+    class="form-inline mt-2 mt-md-0"
+  >
+    <input
+      class="form-control mr-sm-2"
+      name="username"
+      [(ngModel)]="model.username"
+      placeholder="Username"
+      aria-label="Search"
+    />
+    <input
+      class="form-control mr-sm-2"
+      name="password"
+      [(ngModel)]="model.password"
+      placeholder="Password"
+      type="password"
+      aria-label="Search"
+    />
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      Login
+    </button>
+  </form>
+  }
+</nav> -->
