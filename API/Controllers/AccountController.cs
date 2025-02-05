@@ -24,26 +24,26 @@ public class AccountController : BaseApiController
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
+        return Ok();
+        // using var hmac = new HMACSHA512();
 
-        using var hmac = new HMACSHA512();
+        // var user = new AppUser
+        // {
+        //     UserName = registerDto.Username.ToLower(),
+        //     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+        //     PasswordSalt = hmac.Key
+        // };
 
-        var user = new AppUser
-        {
-            UserName = registerDto.Username.ToLower(),
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-            PasswordSalt = hmac.Key
-        };
-
-        context.Users.Add(user);
-        await context.SaveChangesAsync();
+        // context.Users.Add(user);
+        // await context.SaveChangesAsync();
 
 
-        UserDto userDto = new UserDto
-        {
-            Username = user.UserName,
-            Token = tokenService.CreateToken(user)
-        };
-        return userDto;
+        // UserDto userDto = new UserDto
+        // {
+        //     Username = user.UserName,
+        //     Token = tokenService.CreateToken(user)
+        // };
+        // return userDto;
     }
 
     [HttpPost("login")]
