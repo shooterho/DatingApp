@@ -39,11 +39,13 @@ public class UserRepository : IUserRepository
         return await context.Users.FindAsync(id);
     }
 
+    //this will cause repeat object error when calling from client
     public async Task<AppUser?> GetUserByUsernameAsync(string username)
     {
         return await context.Users.Include(x => x.Photos).SingleOrDefaultAsync((x) => x.UserName == username);
     }
 
+    //this will cause repeat object error when calling from client
     public async Task<IEnumerable<AppUser>> GetUsersAsync()
     {
         return await context.Users.Include(x => x.Photos).ToListAsync();
