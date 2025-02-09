@@ -10,7 +10,7 @@ export type Member = {
   lastActive: Date;
   gender: string;
   introduction: string;
-  interest: any;
+  interests: any;
   lookingFor: string;
   city: string;
   country: string;

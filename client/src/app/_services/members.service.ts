@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Member } from '../_models/member';
 import { AccountService } from './account.service';
 import { of, single, tap } from 'rxjs';
+import { Photo } from '../_models/photo';
 
 @Injectable({
   providedIn: 'root',
@@ -38,5 +39,41 @@ export class MembersService {
         });
       })
     );
+  }
+
+  deletePhoto(photo: Photo) {
+    return this.http
+      .delete(this.baseUrl + 'users/delete-photo/' + photo.id)
+      .pipe(
+        tap(() => {
+          this.members.update((members) => {
+            return members.map((member) => {
+              if (member.photos.includes(photo)) {
+                member.photos = member.photos.filter((p) => {
+                  return p.id !== photo.id;
+                });
+              }
+              return member;
+            });
+          });
+        })
+      );
+  }
+
+  setMainPhoto(photo: Photo) {
+    return this.http
+      .put(this.baseUrl + 'users/set-main-photo/' + photo.id, {})
+      .pipe(
+        tap(() => {
+          this.members.update((members) => {
+            return members.map((member) => {
+              if (member.photos.includes(photo)) {
+                member.photoUrl = photo.url;
+              }
+              return member;
+            });
+          });
+        })
+      );
   }
 }

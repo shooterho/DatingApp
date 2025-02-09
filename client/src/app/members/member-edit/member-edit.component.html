@@ -61,8 +61,8 @@
           <h4>Interests</h4>
           <textarea
             class="form-control"
-            name="interest"
-            [(ngModel)]="member.interest"
+            name="interests"
+            [(ngModel)]="member.interests"
             rows="6"
           ></textarea>
           <h4 class="mt-2">Location Details</h4>
@@ -84,7 +84,12 @@
           </div>
         </form>
       </tab>
-      <tab heading="Edit photo"> Photos here </tab>
+      <tab heading="Edit photo">
+        <app-photo-editor
+          [member]="member"
+          (memberChange)="onMemberChange($event)"
+        ></app-photo-editor
+      ></tab>
     </tabset>
   </div>
 </div>
