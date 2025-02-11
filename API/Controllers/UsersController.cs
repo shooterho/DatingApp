@@ -66,16 +66,17 @@ public class UsersController : BaseApiController
     [HttpPost("add-photo")]
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
     {
-        var result = await photoService.AddPhotoAsync(file);
+        var result = await photoService.AddPhotoAsync(file); //call cloudinary API
 
         if (result.Error != null) return BadRequest(result.Error.Message);
-
 
         var photo = new Photo { Url = result.SecureUrl.AbsoluteUri, PublicId = result.PublicId };
 
         var user = await userRepository.GetUserByUsernameAsync(User.GetUsername()); //update user so need to get user instead of member
         //IMPORTANT, need to ask deepseek why getuserbyusernameasync no error here, but has error on postman
         if (user == null) return BadRequest("Cannot update user");
+
+        if (user.Photos.Count == 0) photo.IsMain = true;
 
         user.Photos.Add(photo);
 

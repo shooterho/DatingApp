@@ -65,15 +65,19 @@ export class MembersService {
       .put(this.baseUrl + 'users/set-main-photo/' + photo.id, {})
       .pipe(
         tap(() => {
-          this.members.update((members) => {
-            return members.map((member) => {
-              if (member.photos.includes(photo)) {
-                member.photoUrl = photo.url;
-              }
-              return member;
-            });
-          });
+          this.updatePhotoUrl(photo);
         })
       );
+  }
+
+  updatePhotoUrl(photo: Photo) {
+    this.members.update((members) => {
+      return members.map((member) => {
+        if (member.photos.includes(photo)) {
+          member.photoUrl = photo.url;
+        }
+        return member;
+      });
+    });
   }
 }
