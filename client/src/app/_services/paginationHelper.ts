@@ -4,7 +4,7 @@ import { signal } from '@angular/core';
 import { PaginatedResult } from '../_models/pagination';
 
 export function setPaginatedResponse<T>(
-  response: HttpResponse<Member[]>,
+  response: HttpResponse<T>,
   paginatedResultSignal: ReturnType<typeof signal<PaginatedResult<T> | null>>
 ) {
   paginatedResultSignal.set({

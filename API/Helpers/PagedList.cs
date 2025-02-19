@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Helpers;
 
+//Just a List that has extra data to be added to Response header in the controller soon
 public class PagedList<T> : List<T>
 {
     public int CurrentPage { get; set; }
