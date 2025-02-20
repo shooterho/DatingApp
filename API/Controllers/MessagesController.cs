@@ -34,7 +34,7 @@ public class MessagesController : BaseApiController
 
         var recipient = await userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
 
-        if (recipient == null || sender == null) return BadRequest("Cannot send message at this time");
+        if (recipient == null || sender == null || sender.UserName == null || recipient.UserName == null) return BadRequest("Cannot send message at this time");
 
         var message = new Message
         {
@@ -92,5 +92,4 @@ public class MessagesController : BaseApiController
 
         return BadRequest("Problem deleting the message");
     }
-
 }
