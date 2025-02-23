@@ -72,10 +72,6 @@ public class UserRepository : IUserRepository
         return await context.Users.Include(x => x.Photos).ToListAsync();
     }
 
-    public async Task<bool> SaveAllAsync()
-    {
-        return await context.SaveChangesAsync() > 0;
-    }
 
     public void Update(AppUser user)
     {

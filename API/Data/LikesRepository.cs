@@ -71,8 +71,4 @@ public class LikesRepository : ILikesRepository
         return members;
     }
 
-    public async Task<bool> SaveChanges()
-    {
-        return await context.SaveChangesAsync() > 0;
-    }
 }
