@@ -6,6 +6,16 @@ DatingApp is a web application developed to enhance personal growth and learning
 
 Experience the application live at: [https://dating-app-cs.azurewebsites.net/](https://dating-app-cs.azurewebsites.net/)
 
+### Demo User Accounts
+
+To explore the app's features, you can log in using the following demo accounts:
+
+- **Username:** `lisa`  
+  **Password:** `Pa$$w0rd`
+
+- **Username:** `todd`  
+  **Password:** `Pa$$w0rd`
+
 ## Features
 
 - **User Authentication**: Secure login and registration system.
