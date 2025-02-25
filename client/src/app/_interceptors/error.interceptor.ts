@@ -10,8 +10,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error) => {
+      console.log('error status :', error.status);
       switch (error.status) {
         case 400:
+          console.log(error);
           if (error.error.errors) {
             console.log('error: ', error);
             console.log('error.error: ', error.error);
@@ -21,6 +23,20 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
               modalStateErrors.push(error.error.errors[key]);
             }
             throw modalStateErrors.flat();
+          } else if (Array.isArray(error.error)) {
+            // Extract error messages from the array of error objects
+            const errorMessagesArray: string[] = error.error.map(
+              (err: any) => err.description || err.message
+            );
+
+            // Prepare a single string for the toastr display by joining messages with a newline
+            const toastrErrorMessage: string = errorMessagesArray.join('\n');
+
+            toastr.error(toastrErrorMessage, error.status.toString());
+            console.log('errorsArray', error.error);
+
+            // Throw the array of error messages so the component can handle it
+            throw errorMessagesArray;
           } else {
             toastr.error(error.error, error.statusCode);
           }
